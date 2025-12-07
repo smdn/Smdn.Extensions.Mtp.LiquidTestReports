@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
 // SPDX-License-Identifier: MIT
-using System.IO;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 using LiquidTestReports.Core.Models;
-using System;
 
 namespace Smdn.Extensions.Mtp.LiquidTestReports;
 

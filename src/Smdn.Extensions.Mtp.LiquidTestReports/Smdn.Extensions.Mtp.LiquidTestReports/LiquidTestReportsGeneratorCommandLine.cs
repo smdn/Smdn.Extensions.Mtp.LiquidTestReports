@@ -1,6 +1,8 @@
 ﻿// SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
 // SPDX-License-Identifier: MIT
+#if SYSTEM_STRING_INDEXOF_CHAR_STRINGCOMPARISON
 using System;
+#endif
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -54,7 +56,6 @@ internal sealed class LiquidTestReportsGeneratorCommandLine : ICommandLineOption
         isHidden: false
       ),
     ];
-
 
   public Task<ValidationResult> ValidateCommandLineOptionsAsync(ICommandLineOptions commandLineOptions)
     => ValidationResult.ValidTask;

@@ -44,12 +44,14 @@ using Schemas.VisualStudio.TeamTest;
 
 namespace Smdn.Extensions.Mtp.LiquidTestReports;
 
+#pragma warning disable IDE0055
 internal sealed class LiquidTestReportsConverter :
   IDataConsumer,
   IDataProducer,
   ITestSessionLifetimeHandler,
   IOutputDeviceDataProducer
 {
+#pragma warning restore IDE0055
   private readonly IMessageBus messageBus;
   private readonly IOutputDevice outputDevice;
   private readonly Task<bool> isEnabledTask;
@@ -60,7 +62,9 @@ internal sealed class LiquidTestReportsConverter :
   private SessionUid? sessionUid;
 
 #if SYSTEM_DIAGNOSTICS_CODEANALYSIS_MEMBERNOTNULLWHENATTRIBUTE
+#pragma warning disable CS3016
   [MemberNotNullWhen(true, nameof(templateFile), nameof(outputFileExtension))]
+#pragma warning restore CS3016
 #endif
   private bool IsEnabled { get; }
 
@@ -95,6 +99,7 @@ internal sealed class LiquidTestReportsConverter :
       ) {
         outputFileExtension = argsOutputFileExtension[0];
 
+#pragma warning disable SA1003
         if (
 #if SYSTEM_STRING_STARTSWITH_CHAR
           !outputFileExtension.StartsWith('.')
@@ -104,6 +109,7 @@ internal sealed class LiquidTestReportsConverter :
         ) {
           outputFileExtension = "." + outputFileExtension;
         }
+#pragma warning restore SA1003
       }
 
       if (
@@ -232,7 +238,7 @@ internal sealed class LiquidTestReportsConverter :
         new FormattedTextOutputDeviceData(
           string.Format(CultureInfo.InvariantCulture, "LiquidTestReports file output: {0}", outputFile)
         ) {
-          ForegroundColor = new SystemConsoleColor { ConsoleColor = ConsoleColor.DarkGreen }
+          ForegroundColor = new SystemConsoleColor { ConsoleColor = ConsoleColor.DarkGreen },
         },
         cancellationToken
       ).ConfigureAwait(false);
@@ -283,9 +289,10 @@ internal sealed class LiquidTestReportsConverter :
 #if SYSTEM_COLLECTIONS_OBJECTMODEL_READONLYDICTIONARY_EMPTY
           System.Collections.ObjectModel.ReadOnlyDictionary<string, object>.Empty,
 #else
-          new Dictionary<string, object>(Template.NamingConvention.StringComparer) { }
+          new Dictionary<string, object>(Template.NamingConvention.StringComparer) { },
 #endif
       },
+#pragma warning disable SA1114
       parameters: templateParameters
         .Concat(builtInParameters.Where(pair => !templateParameters.ContainsKey(pair.Key)))
         .ToDictionary(
@@ -295,6 +302,7 @@ internal sealed class LiquidTestReportsConverter :
 #endif
           comparer: templateParameters.Comparer
         ),
+#pragma warning restore SA1114
       cancellationToken: cancellationToken
     ).ConfigureAwait(false);
 
@@ -331,7 +339,7 @@ internal sealed class LiquidTestReportsConverter :
     return true;
   }
 
-  private static async Task<(string, IList<Exception>)> GenerateReportAsync(
+  private static async Task<(string ReportContent, IList<Exception> GeneratorErrors)> GenerateReportAsync(
     LiquidTestReportsTrxInput /* IReportInput */ reportInput,
     FileInfo templateFile,
     LibraryDrop libraryDrop,
@@ -359,7 +367,7 @@ internal sealed class LiquidTestReportsConverter :
       new LibraryTestRun {
         Run = testRunDrop,
         Library = libraryDrop,
-        Parameters = parameters
+        Parameters = parameters,
       }
     );
 

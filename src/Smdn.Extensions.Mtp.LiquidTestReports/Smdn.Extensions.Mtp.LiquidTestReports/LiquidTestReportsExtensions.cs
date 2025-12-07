@@ -16,6 +16,7 @@ public static class LiquidTestReportsExtensions {
   /// Adds LiquidTestReports file generation to a test application.
   /// </summary>
   /// <param name="builder">The test application builder.</param>
+  [CLSCompliant(false)]
   public static void AddLiquidTestReportsProvider(this ITestApplicationBuilder builder)
   {
     if (builder is null)

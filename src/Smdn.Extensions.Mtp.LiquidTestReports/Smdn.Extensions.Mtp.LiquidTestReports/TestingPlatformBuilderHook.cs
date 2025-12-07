@@ -1,5 +1,7 @@
 ﻿// SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
 // SPDX-License-Identifier: MIT
+using System;
+
 using Microsoft.Testing.Platform.Builder;
 
 namespace Smdn.Extensions.Mtp.LiquidTestReports;
@@ -13,7 +15,10 @@ public static class TestingPlatformBuilderHook {
   /// Adds TrxReport support to the Testing Platform Builder.
   /// </summary>
   /// <param name="testApplicationBuilder">The test application builder.</param>
-  /// <param name="_">The command line arguments.</param>
-  public static void AddExtensions(ITestApplicationBuilder testApplicationBuilder, string[] _)
+  /// <param name="arguments">The command line arguments.</param>
+#pragma warning disable IDE0060
+  [CLSCompliant(false)]
+  public static void AddExtensions(ITestApplicationBuilder testApplicationBuilder, string[] arguments)
     => testApplicationBuilder.AddLiquidTestReportsProvider();
+#pragma warning restore IDE0060
 }
