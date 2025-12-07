@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: "2022 smdn <smdn@smdn.jp>"
+
+name: Run tests with released packages
+
+on:
+  release:
+    types: [published]
+
+  workflow_dispatch:
+    inputs:
+      project:
+        description: "The project name to run the test."
+        required: false
+        type: string
+
+      os:
+        description: "The OS label which run the test on. (ubuntu-24.04, ubuntu-22.04, windows-latest, macos-latest, etc.)"
+        required: false
+        type: string
+
+      dotnet_sdk_version:
+        description: "The minimum .NET SDK version which is used to run tests."
+        required: false
+        type: string
+
+      verbose:
+        description: "If true, enables verbose output."
+        required: false
+        type: boolean
+        default: false
+
+      dotnet_test_options_verbosity_level:
+        # cSpell:disable-next-line
+        description: "The argument to be set to the `--verbosity <LEVEL>` option of the `dotnet test` command. <LEVEL> := q[uiet], m[inimal], n[ormal], d[etailed], diag[nostic]"
+        required: false
+        type: string
+
+      dotnet_test_options_framework:
+        description: "The argument to be set to the `--framework <FRAMEWORK>` option of the `dotnet test` command."
+        required: false
+        type: string
+
+      dotnet_test_options_filter_expression:
+        description: "The argument to be set to the `--filter <EXPRESSION>` option of the `dotnet test` command."
+        required: false
+        type: string
+
+jobs:
+  await-package-publishing:
+    name: Wait for publishing of released package
+    if: ${{ github.event_name == 'release' }}
+    uses: smdn/Smdn.Fundamentals/.github/workflows/nuget-await-package-publishing.yml@workflows/nuget/v1.0.0
+    with:
+      release_tag: ${{ github.event.release.tag_name }}
+
+  run-test:
+    name: Run tests with released packages
+    uses: smdn/Smdn.Fundamentals/.github/workflows/test.yml@workflows/test/v1.5.0
+    needs: await-package-publishing
+    if: ${{ always() && !failure() && !cancelled() }} # run tests even if await-package-publishing is skipped
+    with:
+      project:                                ${{ inputs.project }}
+      os:                                     ${{ inputs.os == '' && 'ubuntu-24.04, ubuntu-22.04, windows-latest, macos-latest' || inputs.os }}
+      extra_options_common:                   '/p:TestReleasedPackage=true'
+      verbose:                                ${{ inputs.verbose == 'true' }}
+      dotnet_sdk_version:                     ${{ inputs.dotnet_sdk_version == '' && '10.0.100' || inputs.dotnet_sdk_version }}
+      timeout_minutes_test_job:               10
+      timeout_hang:                           "[ {'OS':'windows','Timeout':'6min'}, {'OS':'macos','Timeout':'3min'}, {'OS':'','Timeout':'1min'} ]"
+      timeout_vstest_connection:              "[ {'OS':'windows','Timeout':360}, {'OS':'macos','Timeout':180}, {'OS':'','Timeout':60} ]"
+      dotnet_test_options_verbosity_level:    ${{ inputs.dotnet_test_options_verbosity_level }}
+      dotnet_test_options_framework:          ${{ inputs.dotnet_test_options_framework }}
+      dotnet_test_options_filter_expression:  ${{ inputs.dotnet_test_options_filter_expression }}
+    secrets:
+      token_repo: ${{ secrets.GITHUB_TOKEN }}

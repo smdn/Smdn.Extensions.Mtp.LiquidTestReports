@@ -1,0 +1,101 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "CodeQL"
+
+# ref: https://docs.microsoft.com/en-us/dotnet/devops/dotnet-secure-github-action
+on:
+  # push:
+  #   branches: [ main ]
+  #   paths:
+  #   - 'src/**/*.cs'
+  #   - 'src/**/*.csproj'
+  # pull_request:
+  #   # The branches below must be a subset of the branches above
+  #   branches: [ main ]
+  #   paths:
+  #   - 'src/**/*.cs'
+  #   - 'src/**/*.csproj'
+  # schedule:
+  #   - cron: '07 20 03,16 * *'
+  workflow_dispatch:
+
+env:
+  # cSpell:disable
+  MINIMAL_DOTNET_SDK_VERSION: 10.0.100
+  # cSpell:enable
+
+# cSpell:ignore autobuild
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
+        # Learn more about CodeQL language support at https://git.io/codeql-language-support
+        include:
+          - language: csharp
+            build-mode: manual
+            source-root: './src'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6.0.1
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v4
+      with:
+        languages: ${{ matrix.language }}
+        # If you wish to specify custom queries, you can do so here or in a config file.
+        # By default, queries listed here will override any specified in a config file.
+        # Prefix the list here with "+" to use these queries and those in the config file.
+        # queries: ./path/to/local/query, your-org/your-repo/queries@main
+        config-file: ./.github/codeql/configurations.yml
+
+    - name: Autobuild
+      if: ${{ (matrix.build-mode == 'autobuild') || (matrix.build-mode == '') }}
+      uses: github/codeql-action/autobuild@v4
+
+    - name: Check .NET SDK ${{ env.MINIMAL_DOTNET_SDK_VERSION }} is installed
+      id: dotnet-sdk-version
+      if: ${{ (matrix.build-mode == 'manual') && (matrix.language == 'csharp') }}
+      shell: pwsh
+      run: |
+        $installed_version = [System.Version]::Parse($(dotnet --version))
+        $required_version  = [System.Version]::Parse('${{ env.MINIMAL_DOTNET_SDK_VERSION }}')
+
+        if ( $required_version -gt $installed_version ) {
+          # required SDK version is not installed
+          "::notice::.NET SDK version: installed ${installed_version}, required ${required_version}"
+
+          "install-dotnet-sdk-version=${required_version}" >> $Env:GITHUB_OUTPUT
+        }
+
+    - name: Install .NET SDK ${{ steps.dotnet-sdk-version.outputs.install-dotnet-sdk-version }}
+      if: ${{ (matrix.build-mode == 'manual') && (matrix.language == 'csharp') && (steps.dotnet-sdk-version.outputs.install-dotnet-sdk-version != '') }}
+      uses: actions/setup-dotnet@v5.0.1
+      with:
+        dotnet-version: '${{ steps.dotnet-sdk-version.outputs.install-dotnet-sdk-version }}'
+
+    - name: Build all .NET projects
+      if: ${{ (matrix.build-mode == 'manual') && (matrix.language == 'csharp') }}
+      run: |
+        ./eng/BuildAllProjects.ps1
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v4

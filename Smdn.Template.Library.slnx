@@ -1,0 +1,12 @@
+<!--
+SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Smdn.Template.Assembly/Smdn.Template.Assembly.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Smdn.Template.Assembly/Smdn.Template.Assembly.Tests.csproj" />
+  </Folder>
+</Solution>
