@@ -5,8 +5,14 @@ SPDX-License-Identifier: MIT
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks Condition=" '$(EnableTargetFrameworkDotNet100)' == 'true' ">net10.0;$(TargetFrameworks)</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(EnableTargetFrameworkDotNet80)' == 'true' ">net8.0;$(TargetFrameworks)</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(EnableTargetFrameworkNetFx)' == 'true' ">$(TargetFrameworks)</TargetFrameworks>
+    <!-- <TargetFrameworks Condition=" '$(EnableTargetFrameworkDotNet80)' == 'true' ">net8.0;$(TargetFrameworks)</TargetFrameworks> -->
+    <!-- <TargetFrameworks Condition=" '$(EnableTargetFrameworkNetFx)' == 'true' ">$(TargetFrameworks)</TargetFrameworks> -->
+
+    <!-- To avoid concurrent access to files in the test target project, disable parallel testing per TFMs. -->
+    <TestTfmsInParallel>false</TestTfmsInParallel>
+
+    <!-- suppress warning CS2002 caused by the target 'WriteTestProjectInfo' -->
+    <NoWarn>CS2002;$(NoWarn)</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -20,15 +26,30 @@ SPDX-License-Identifier: MIT
     <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="2.0.2" />
     <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.0.2" />
     <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.0.2" />
+    <PackageReference Include="Smdn.Fundamental.Shell" Version="3.1.0" />
   </ItemGroup>
 
-  <!-- run output verification before running `dotnet test`'s test process -->
-  <Target Name="VerifyGeneratedReportContent" AfterTargets="_MTPBuild">
-    <Exec Command="dotnet build $(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\MSTestTestProject\" />
-    <Exec Command="dotnet msbuild /t:VerifyGeneratedReportContent $(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\MSTestTestProject\" />
+  <Target Name="WriteTestProjectInfo" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <SourceLines Include="#pragma warning disable IDE0055" />
+      <SourceLines Include="internal static class TestProjectInfo {" />
+      <SourceLines Include="public const string RootDirectory = &quot;$(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\&quot;$([MSBuild]::Escape(';'))" />
+      <SourceLines Include="}" />
+    </ItemGroup>
 
-    <Exec Command="dotnet build $(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\NUnitTestProject\" />
-    <Exec Command="dotnet msbuild /t:VerifyGeneratedReportContent $(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\NUnitTestProject\" />
+    <PropertyGroup>
+      <TestProjectInfoFilePath>$(MSBuildThisFileDirectory)TestProjectInfo.cs</TestProjectInfoFilePath>
+    </PropertyGroup>
+
+    <WriteLinesToFile
+      File="$(TestProjectInfoFilePath)"
+      Overwrite="true"
+      Lines="@(SourceLines)"
+    />
+
+    <ItemGroup>
+      <!-- XXX: This causes compiler warning CS2002. -->
+      <Compile Include="$(TestProjectInfoFilePath)" Visible="false" AutoGen="true" />
+    </ItemGroup>
   </Target>
-
 </Project>
