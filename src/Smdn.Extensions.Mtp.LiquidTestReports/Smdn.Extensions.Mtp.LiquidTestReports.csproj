@@ -50,7 +50,7 @@ SPDX-License-Identifier: MIT
     <ItemGroup>
       <SourceLines Include="#pragma warning disable IDE0055" />
       <SourceLines Include="#pragma warning disable CA1050" />
-      <SourceLines Include="public static class ExtensionInfo {" />
+      <SourceLines Include="internal static class ExtensionInfo {" />
       <SourceLines Include="public const string SemVer = &quot;$(Version)&quot;$([MSBuild]::Escape(';'))" />
       <SourceLines Include="public const string Description = &quot;$(Description)&quot;$([MSBuild]::Escape(';'))" />
       <SourceLines Include="public const string DisplayName = &quot;$(MtpExtensionDisplayName)&quot;$([MSBuild]::Escape(';'))" />
