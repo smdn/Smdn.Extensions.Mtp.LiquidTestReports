@@ -1,0 +1,12 @@
+<!--
+SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Project>
+  <Import Project="$(MSBuildThisFileDirectory)..\..\src\Smdn.Extensions.Mtp.LiquidTestReports\buildTransitive\Smdn.Extensions.Mtp.LiquidTestReports.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\..\src\Smdn.Extensions.Mtp.LiquidTestReports\Smdn.Extensions.Mtp.LiquidTestReports.csproj" />
+  </ItemGroup>
+</Project>
+

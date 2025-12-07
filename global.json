@@ -2,5 +2,8 @@
   "msbuild-sdks": {
     "Smdn.MSBuild.ProjectAssets.Common": "1.6.1",
     "Smdn.MSBuild.ProjectAssets.Library": "1.11.0"
+  },
+  "test": {
+    "runner": "Microsoft.Testing.Platform"
   }
 }

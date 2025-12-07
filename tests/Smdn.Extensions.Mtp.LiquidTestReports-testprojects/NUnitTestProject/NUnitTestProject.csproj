@@ -1,0 +1,59 @@
+<!--
+SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>false</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- configurations for testing with MTP test runner -->
+    <OutputType>Exe</OutputType>
+    <EnableNUnitRunner>true</EnableNUnitRunner>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.Testing.Platform" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.0.2" />
+    <PackageReference Include="NUnit" Version="4.4.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="5.2.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --ignore-exit-code 2</TestingPlatformCommandLineArguments> <!-- ignore exit codes that indicate test failures -->
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --report-trx --report-trx-filename TestResult.$(TargetFramework).trx --results-directory $(MSBuildThisFileDirectory)TestResults</TestingPlatformCommandLineArguments>
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --liquidtr-template $(MSBuildThisFileDirectory)..\TestReport.template.liquid.md</TestingPlatformCommandLineArguments>
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --liquidtr-parameter A=0</TestingPlatformCommandLineArguments>
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --liquidtr-parameter B=false</TestingPlatformCommandLineArguments>
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --liquidtr-parameter B=true</TestingPlatformCommandLineArguments>
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --liquidtr-parameter C=Hello!</TestingPlatformCommandLineArguments>
+  </PropertyGroup>
+
+  <!--
+    This target runs tests equivalent to `dotnet test` and verifies the contents of the generated test report file.
+  -->
+  <Target Name="VerifyGeneratedReportContent">
+    <CallTarget Targets="Test" ContinueOnError="WarnAndContinue" />
+
+    <PropertyGroup>
+      <GeneratedReportContent>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)TestResults\TestResult.net10.0.md'))</GeneratedReportContent>
+    </PropertyGroup>
+
+    <Error Text="Unexpected output: TestTargetName" Condition="!$(GeneratedReportContent.Contains('|TestTargetName|$(AssemblyName)|'))" />
+    <Error Text="Unexpected output: TargetFramework" Condition="!$(GeneratedReportContent.Contains('|TargetFramework|.NET 10.0|'))" />
+    <Error Text="Unexpected output: RuntimeIdentifier" Condition="!$(GeneratedReportContent.Contains('|RuntimeIdentifier|$([System.Runtime.InteropServices.RuntimeInformation]::RuntimeIdentifier)|'))" />
+    <Error Text="Unexpected output: Tests passed" Condition="!$(GeneratedReportContent.Contains('|Tests passed|1|'))" />
+    <Error Text="Unexpected output: Tests failed" Condition="!$(GeneratedReportContent.Contains('|Tests failed|1|'))" />
+    <Error Text="Unexpected output: Tests skipped" Condition="!$(GeneratedReportContent.Contains('|Tests skipped|1|'))" />
+    <Error Text="Unexpected output: A" Condition="!$(GeneratedReportContent.Contains('|A|0|'))" />
+    <Error Text="Unexpected output: B" Condition="!$(GeneratedReportContent.Contains('|B|true|'))" />
+    <Error Text="Unexpected output: C" Condition="!$(GeneratedReportContent.Contains('|C|Hello!|'))" />
+  </Target>
+</Project>

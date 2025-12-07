@@ -1,0 +1,59 @@
+﻿<!--
+SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net8.0;netstandard2.0</TargetFrameworks>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix>preview1</VersionSuffix>
+    <!-- <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion> -->
+    <NoWarn>CS1591;$(NoWarn)</NoWarn> <!-- CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member' -->
+    <NoWarn>CS2002;$(NoWarn)</NoWarn> <!-- suppress warning CS2002 caused by the target 'WriteMtpExtensionInfo' -->
+    <MtpExtensionDisplayName>LiquidTestReports test report converter</MtpExtensionDisplayName>
+  </PropertyGroup>
+
+  <PropertyGroup Label="assembly attributes">
+    <Description>
+<![CDATA[The MTP extension to convert TRX files generated during the test session into the preferred format using LiquidTestReports.]]>
+    </Description>
+    <CopyrightYear>2025</CopyrightYear>
+  </PropertyGroup>
+
+  <PropertyGroup Label="package properties">
+    <PackageTags>testing;unittesting;extensions;MTP;TRX</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotLiquid" Version="2.3.197" />
+    <PackageReference Include="LiquidTestReports.Core" Version="2.0.0-beta.6" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.0.2" />
+  </ItemGroup>
+
+  <Target Name="WriteMtpExtensionInfo" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <SourceLines Include="#pragma warning disable IDE0055" />
+      <SourceLines Include="#pragma warning disable CA1050" />
+      <SourceLines Include="public static class ExtensionInfo {" />
+      <SourceLines Include="public const string SemVer=&quot;$(Version)&quot;$([MSBuild]::Escape(';'))" />
+      <SourceLines Include="public const string Description=&quot;$(Description)&quot;$([MSBuild]::Escape(';'))" />
+      <SourceLines Include="public const string DisplayName=&quot;$(MtpExtensionDisplayName)&quot;$([MSBuild]::Escape(';'))" />
+      <SourceLines Include="}" />
+    </ItemGroup>
+
+    <PropertyGroup>
+      <MtpExtensionInfoFilePath>$(MSBuildThisFileDirectory)ExtensionInfo.cs</MtpExtensionInfoFilePath>
+    </PropertyGroup>
+
+    <WriteLinesToFile
+      File="$(MtpExtensionInfoFilePath)"
+      Overwrite="true"
+      Lines="@(SourceLines)"
+    />
+
+    <ItemGroup>
+      <!-- XXX: This causes compiler warning CS2002. -->
+      <Compile Include="$(MtpExtensionInfoFilePath)" />
+    </ItemGroup>
+  </Target>
+</Project>
