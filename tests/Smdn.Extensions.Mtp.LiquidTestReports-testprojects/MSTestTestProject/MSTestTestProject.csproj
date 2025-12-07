@@ -19,7 +19,7 @@ SPDX-License-Identifier: MIT
 
   <ItemGroup>
     <PackageReference Update="Microsoft.Testing.Platform" Version="2.0.2" />
-    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.0.2" Condition="'$(TestReleasedPackage)' != 'true'" />
     <PackageReference Include="MSTest" Version="4.0.2" />
   </ItemGroup>
 

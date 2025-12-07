@@ -3,10 +3,16 @@ SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
 SPDX-License-Identifier: MIT
 -->
 <Project>
-  <Import Project="$(MSBuildThisFileDirectory)..\..\src\Smdn.Extensions.Mtp.LiquidTestReports\buildMultiTargeting\Smdn.Extensions.Mtp.LiquidTestReports.props" />
+  <ImportGroup Condition="'$(TestReleasedPackage)' != 'true'">
+    <Import Project="$(MSBuildThisFileDirectory)..\..\src\Smdn.Extensions.Mtp.LiquidTestReports\buildMultiTargeting\Smdn.Extensions.Mtp.LiquidTestReports.props" />
+  </ImportGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TestReleasedPackage)' != 'true'">
     <ProjectReference Include="$(MSBuildThisFileDirectory)..\..\src\Smdn.Extensions.Mtp.LiquidTestReports\Smdn.Extensions.Mtp.LiquidTestReports.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TestReleasedPackage)' == 'true'">
+    <PackageReference Include="Smdn.Extensions.Mtp.LiquidTestReports" Version="1.0.0-preview1" />
   </ItemGroup>
 </Project>
 
