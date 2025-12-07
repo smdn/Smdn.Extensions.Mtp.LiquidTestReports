@@ -32,6 +32,19 @@ SPDX-License-Identifier: MIT
     <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="buildMultiTargeting/**">
+      <Pack>true</Pack>
+      <PackagePath>buildMultiTargeting</PackagePath>
+    </Content>
+    <TfmSpecificPackageFile Include="buildTransitive/**">
+      <PackagePath>buildTransitive/$(TargetFramework)</PackagePath>
+    </TfmSpecificPackageFile>
+    <TfmSpecificPackageFile Include="build/**">
+      <PackagePath>build/$(TargetFramework)</PackagePath>
+    </TfmSpecificPackageFile>
+  </ItemGroup>
+
   <Target Name="WriteMtpExtensionInfo" BeforeTargets="BeforeBuild">
     <ItemGroup>
       <SourceLines Include="#pragma warning disable IDE0055" />

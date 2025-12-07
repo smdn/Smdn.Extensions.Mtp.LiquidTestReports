@@ -3,5 +3,5 @@ SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
 SPDX-License-Identifier: MIT
 -->
 <Project>
-  <Import Project="$(MSBuildThisFileDirectory)..\buildMultiTargeting\Smdn.Extensions.Mtp.LiquidTestReports.props" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\buildMultiTargeting\Smdn.Extensions.Mtp.LiquidTestReports.props" />
 </Project>
