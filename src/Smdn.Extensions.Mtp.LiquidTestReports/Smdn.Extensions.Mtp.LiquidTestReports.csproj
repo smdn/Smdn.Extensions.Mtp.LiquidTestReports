@@ -47,24 +47,23 @@ SPDX-License-Identifier: MIT
   </ItemGroup>
 
   <Target Name="WriteMtpExtensionInfo" BeforeTargets="BeforeBuild">
-    <ItemGroup>
-      <SourceLines Include="#pragma warning disable IDE0055" />
-      <SourceLines Include="#pragma warning disable CA1050" />
-      <SourceLines Include="internal static class ExtensionInfo {" />
-      <SourceLines Include="public const string SemVer = &quot;$(Version)&quot;$([MSBuild]::Escape(';'))" />
-      <SourceLines Include="public const string Description = &quot;$(Description)&quot;$([MSBuild]::Escape(';'))" />
-      <SourceLines Include="public const string DisplayName = &quot;$(MtpExtensionDisplayName)&quot;$([MSBuild]::Escape(';'))" />
-      <SourceLines Include="}" />
-    </ItemGroup>
-
     <PropertyGroup>
-      <MtpExtensionInfoFilePath>$(MSBuildThisFileDirectory)ExtensionInfo.cs</MtpExtensionInfoFilePath>
+      <MtpExtensionInfoFilePath>$(MSBuildThisFileDirectory)ExtensionInfo.g.cs</MtpExtensionInfoFilePath>
+      <MtpExtensionInfoFileContent><![CDATA[
+#pragma warning disable CA1050
+
+internal static class ExtensionInfo {
+  public const string SemVer = "$(Version)"%3B
+  public const string Description = "$(Description)"%3B
+  public const string DisplayName = "$(MtpExtensionDisplayName)"%3B
+}
+]]></MtpExtensionInfoFileContent>
     </PropertyGroup>
 
     <WriteLinesToFile
       File="$(MtpExtensionInfoFilePath)"
       Overwrite="true"
-      Lines="@(SourceLines)"
+      Lines="$(MtpExtensionInfoFileContent)"
     />
 
     <ItemGroup>
