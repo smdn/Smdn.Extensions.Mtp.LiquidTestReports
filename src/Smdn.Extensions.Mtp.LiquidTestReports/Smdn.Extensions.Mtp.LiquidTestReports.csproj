@@ -45,6 +45,13 @@ SPDX-License-Identifier: MIT
     <TfmSpecificPackageFile Include="build/**">
       <PackagePath>build/$(TargetFramework)</PackagePath>
     </TfmSpecificPackageFile>
+    <!-- Third party notice -->
+    <None
+      Include="$(MSBuildThisFileDirectory)..\..\ThirdPartyNotices.md"
+      Pack="true"
+      PackagePath="ThirdPartyNotices.md"
+      CopyToOutputDirectory="None"
+    />
   </ItemGroup>
 
   <Target Name="GenerateReadmeFileContent">
