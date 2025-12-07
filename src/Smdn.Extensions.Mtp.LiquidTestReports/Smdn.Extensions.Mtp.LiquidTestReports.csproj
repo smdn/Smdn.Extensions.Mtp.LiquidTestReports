@@ -25,6 +25,7 @@ SPDX-License-Identifier: MIT
 
   <PropertyGroup Label="package properties">
     <PackageTags>testing;unittesting;extensions;MTP;TRX</PackageTags>
+    <GenerateNupkgReadmeFileDependsOnTargets>$(GenerateNupkgReadmeFileDependsOnTargets);GenerateReadmeFileContent</GenerateNupkgReadmeFileDependsOnTargets>
   </PropertyGroup>
 
   <ItemGroup>
@@ -45,6 +46,34 @@ SPDX-License-Identifier: MIT
       <PackagePath>build/$(TargetFramework)</PackagePath>
     </TfmSpecificPackageFile>
   </ItemGroup>
+
+  <Target Name="GenerateReadmeFileContent">
+    <PropertyGroup>
+      <PackageReadmeFileContent><![CDATA[# $(PackageId) $(PackageVersion)
+$(Description)
+
+## Getting started
+First, add the [$(PackageId)](https://www.nuget.org/packages/$(PackageId)) package to the test project file.
+
+```
+dotnet add package $(PackageId)
+```
+
+To generate and convert a test report, please specify at least the following three options as arguments to `dotnet test`.
+
+```
+dotnet test --report-trx --report-trx-filename TestResult.trx --liquidtr-template TestResult.template.md
+```
+
+For details on each option, please refer to the output of `dotnet test --help`.
+
+Examples of project configurations for each test framework can be found on the [GitHub repository]($(RepositoryUrl)/tree/main/examples/$(PackageId)/).
+
+## Contributing
+This project welcomes contributions, feedbacks and suggestions. You can contribute to this project by submitting [Issues]($(RepositoryUrl)/issues/new/choose) or [Pull Requests]($(RepositoryUrl)/pulls/) on the [GitHub repository]($(RepositoryUrl)).
+]]></PackageReadmeFileContent>
+    </PropertyGroup>
+  </Target>
 
   <Target Name="WriteMtpExtensionInfo" BeforeTargets="BeforeBuild">
     <PropertyGroup>
