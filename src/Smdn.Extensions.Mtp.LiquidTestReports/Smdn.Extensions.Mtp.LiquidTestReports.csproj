@@ -69,7 +69,7 @@ SPDX-License-Identifier: MIT
 
     <ItemGroup>
       <!-- XXX: This causes compiler warning CS2002. -->
-      <Compile Include="$(MtpExtensionInfoFilePath)" />
+      <Compile Include="$(MtpExtensionInfoFilePath)" Visible="false" AutoGen="true" />
     </ItemGroup>
   </Target>
 </Project>
