@@ -6,6 +6,9 @@
 
 using System;
 using System.Collections.Generic;
+#if SYSTEM_DIAGNOSTICS_CODEANALYSIS_REQUIRESUNREFERENCEDCODEATTRIBUTE
+using System.Diagnostics.CodeAnalysis;
+#endif
 using System.Reflection;
 
 using LiquidTestReports.Core.Drops;
@@ -26,6 +29,9 @@ internal class ReportGeneratorWrapper {
 
   private readonly GenerateReportDelegate generateReport;
 
+#if SYSTEM_DIAGNOSTICS_CODEANALYSIS_REQUIRESUNREFERENCEDCODEATTRIBUTE
+  [RequiresUnreferencedCode($"{nameof(ReportGeneratorWrapper)} is incompatible with trimming.")]
+#endif
   public ReportGeneratorWrapper(LibraryTestRun libraryTestRun)
   {
     var typeOfReportGenerator = typeof(LibraryTestRun)
