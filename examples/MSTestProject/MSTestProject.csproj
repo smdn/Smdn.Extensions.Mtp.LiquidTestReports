@@ -1,0 +1,32 @@
+﻿<!--
+SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- configurations for testing with MTP test runner -->
+    <OutputType>Exe</OutputType>
+    <EnableMSTestRunner>true</EnableMSTestRunner>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Testing.Platform" Version="2.0.2" />
+    <PackageReference Include="MSTest" Version="4.0.2" />
+    <PackageReference Include="Smdn.Extensions.Mtp.LiquidTestReports" Version="1.0.0-preview1" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --report-trx --report-trx-filename TestResult.trx</TestingPlatformCommandLineArguments>
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --liquidtr-template $(MSBuildThisFileDirectory)..\TestResult.template.liquid.md</TestingPlatformCommandLineArguments>
+  </PropertyGroup>
+
+</Project>

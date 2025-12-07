@@ -1,4 +1,4 @@
-# Examples for Smdn.Template.Assembly
+# Examples for Smdn.Extensions.Mtp.LiquidTestReports
 
 ## How to run examples
-Move to each example directory and execute the command `dotnet run`.
+Move to each example directory and execute the command `dotnet test`.
