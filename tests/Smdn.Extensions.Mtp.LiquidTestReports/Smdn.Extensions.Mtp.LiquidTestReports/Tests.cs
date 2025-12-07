@@ -74,6 +74,7 @@ public class Tests {
       command: "dotnet",
       arguments: [
         "build", // dotnet build
+        $"/p:TestReleasedPackage={(TestProjectInfo.TestReleasedPackage ? "true" : "false")}",
         projectPath,
       ],
       environmentVariables: GetEnvironmentVariablesForDotnetCommand(null),
@@ -91,6 +92,7 @@ public class Tests {
       command: "dotnet",
       arguments: [
         "msbuild", // dotnet msbuild
+        $"/p:TestReleasedPackage={(TestProjectInfo.TestReleasedPackage ? "true" : "false")}",
         "/t:VerifyGeneratedReportContent",
         projectPath,
       ],

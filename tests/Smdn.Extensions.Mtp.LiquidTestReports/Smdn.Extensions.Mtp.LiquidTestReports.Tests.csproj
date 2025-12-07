@@ -32,9 +32,12 @@ SPDX-License-Identifier: MIT
   <Target Name="WriteTestProjectInfo" BeforeTargets="BeforeBuild">
     <PropertyGroup>
       <TestProjectInfoFilePath>$(MSBuildThisFileDirectory)TestProjectInfo.g.cs</TestProjectInfoFilePath>
+      <TestProjectInfo_TestReleasedPackage>false</TestProjectInfo_TestReleasedPackage>
+      <TestProjectInfo_TestReleasedPackage Condition="'$(TestReleasedPackage)' == 'true'">true</TestProjectInfo_TestReleasedPackage>
       <TestProjectInfoFileContent><![CDATA[
 internal static class TestProjectInfo {
   public const string RootDirectory = @"$(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\"%3B
+  public const bool TestReleasedPackage = $(TestProjectInfo_TestReleasedPackage)%3B
 }
 ]]></TestProjectInfoFileContent>
     </PropertyGroup>
