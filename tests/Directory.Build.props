@@ -16,7 +16,7 @@ SPDX-License-Identifier: MIT
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1"/>
   </ItemGroup>
 
-  <ItemGroup Condition="'Smdn.MSBuild.DefineConstants.NETSdkApi is required' == 'true'">
+  <ItemGroup>
     <PackageReference
       Include="Smdn.MSBuild.DefineConstants.NETSdkApi"
       Version="[1.6.0]"
