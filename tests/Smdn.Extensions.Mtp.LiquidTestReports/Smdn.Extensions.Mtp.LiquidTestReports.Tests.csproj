@@ -30,21 +30,19 @@ SPDX-License-Identifier: MIT
   </ItemGroup>
 
   <Target Name="WriteTestProjectInfo" BeforeTargets="BeforeBuild">
-    <ItemGroup>
-      <SourceLines Include="#pragma warning disable IDE0055" />
-      <SourceLines Include="internal static class TestProjectInfo {" />
-      <SourceLines Include="public const string RootDirectory = &quot;$(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\&quot;$([MSBuild]::Escape(';'))" />
-      <SourceLines Include="}" />
-    </ItemGroup>
-
     <PropertyGroup>
-      <TestProjectInfoFilePath>$(MSBuildThisFileDirectory)TestProjectInfo.cs</TestProjectInfoFilePath>
+      <TestProjectInfoFilePath>$(MSBuildThisFileDirectory)TestProjectInfo.g.cs</TestProjectInfoFilePath>
+      <TestProjectInfoFileContent><![CDATA[
+internal static class TestProjectInfo {
+  public const string RootDirectory = @"$(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\"%3B
+}
+]]></TestProjectInfoFileContent>
     </PropertyGroup>
 
     <WriteLinesToFile
       File="$(TestProjectInfoFilePath)"
       Overwrite="true"
-      Lines="@(SourceLines)"
+      Lines="$(TestProjectInfoFileContent)"
     />
 
     <ItemGroup>
