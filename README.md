@@ -1,7 +1,11 @@
 [![GitHub license](https://img.shields.io/github/license/smdn/Smdn.Extensions.Mtp.LiquidTestReports)](https://github.com/smdn/Smdn.Extensions.Mtp.LiquidTestReports/blob/main/LICENSE.txt)
 [![tests/main](https://img.shields.io/github/actions/workflow/status/smdn/Smdn.Extensions.Mtp.LiquidTestReports/test.yml?branch=main&label=tests%2Fmain)](https://github.com/smdn/Smdn.Extensions.Mtp.LiquidTestReports/actions/workflows/test.yml)
 [![CodeQL](https://github.com/smdn/Smdn.Extensions.Mtp.LiquidTestReports/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/smdn/Smdn.Extensions.Mtp.LiquidTestReports/actions/workflows/codeql-analysis.yml)
+
+# Smdn.Extensions.Mtp.LiquidTestReports
 [![NuGet](https://img.shields.io/nuget/v/Smdn.Extensions.Mtp.LiquidTestReports.svg)](https://www.nuget.org/packages/Smdn.Extensions.Mtp.LiquidTestReports/)
+
+The [Microsoft.Testing.Platform extension](https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-extensions) to convert TRX files generated during the test session into the preferred format using [LiquidTestReports](https://github.com/kurtmkurtm/LiquidTestReports), the [Liquid template language](https://shopify.github.io/liquid/) processor.
 
 # For contributors
 Contributions are appreciated!
