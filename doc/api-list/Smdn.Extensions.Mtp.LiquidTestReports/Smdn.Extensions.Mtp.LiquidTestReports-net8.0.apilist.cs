@@ -1,7 +1,7 @@
-// Smdn.Extensions.Mtp.LiquidTestReports.dll (Smdn.Extensions.Mtp.LiquidTestReports-1.0.0-preview1)
+// Smdn.Extensions.Mtp.LiquidTestReports.dll (Smdn.Extensions.Mtp.LiquidTestReports-1.0.0-preview2)
 //   Name: Smdn.Extensions.Mtp.LiquidTestReports
 //   AssemblyVersion: 1.0.0.0
-//   InformationalVersion: 1.0.0-preview1+4e162232f731d5781eb508686276793b8d35e1cf
+//   InformationalVersion: 1.0.0-preview2+bb0a390b2d48625d6ca3901922b13a6a573052df
 //   TargetFramework: .NETCoreApp,Version=v8.0
 //   Configuration: Release
 //   Referenced assemblies:
@@ -19,12 +19,6 @@
 #nullable enable annotations
 
 using Microsoft.Testing.Platform.Builder;
-
-public static class ExtensionInfo {
-  public const string Description = "The MTP extension to convert TRX files generated during the test session into the preferred format using LiquidTestReports.";
-  public const string DisplayName = "LiquidTestReports test report converter";
-  public const string SemVer = "1.0.0-preview1";
-}
 
 namespace Smdn.Extensions.Mtp.LiquidTestReports {
   public static class LiquidTestReportsExtensions {
