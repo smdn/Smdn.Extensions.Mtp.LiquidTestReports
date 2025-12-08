@@ -1,7 +1,7 @@
-// Smdn.Extensions.Mtp.LiquidTestReports.dll (Smdn.Extensions.Mtp.LiquidTestReports-1.0.0-preview2)
+// Smdn.Extensions.Mtp.LiquidTestReports.dll (Smdn.Extensions.Mtp.LiquidTestReports-1.0.0-preview3)
 //   Name: Smdn.Extensions.Mtp.LiquidTestReports
 //   AssemblyVersion: 1.0.0.0
-//   InformationalVersion: 1.0.0-preview2+bb0a390b2d48625d6ca3901922b13a6a573052df
+//   InformationalVersion: 1.0.0-preview3+763fd67a2fa1b6d778239e2af459dfa867c9eb6e
 //   TargetFramework: .NETStandard,Version=v2.0
 //   Configuration: Release
 //   Referenced assemblies:
