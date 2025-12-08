@@ -57,6 +57,7 @@ internal sealed class LiquidTestReportsConverter :
   private readonly Task<bool> isEnabledTask;
   private readonly FileInfo? templateFile;
   private readonly string? outputFileExtension;
+  private readonly bool appendGitHubStepSummary;
   private readonly Dictionary<string, string> templateParameters = new(Template.NamingConvention.StringComparer);
 
   private SessionUid? sessionUid;
@@ -80,6 +81,7 @@ internal sealed class LiquidTestReportsConverter :
     IsEnabled = false;
     templateFile = null;
     outputFileExtension = null;
+    appendGitHubStepSummary = false;
 
     if (
       commandLineOptionsService.TryGetOptionArgumentList(
@@ -111,6 +113,10 @@ internal sealed class LiquidTestReportsConverter :
         }
 #pragma warning restore SA1003
       }
+
+      appendGitHubStepSummary = commandLineOptionsService.IsOptionSet(
+        LiquidTestReportsGeneratorCommandLine.LiquidTestReportsGitHubStepSummaryOptionName
+      );
 
       if (
         commandLineOptionsService.TryGetOptionArgumentList(
@@ -213,7 +219,7 @@ internal sealed class LiquidTestReportsConverter :
 #pragma warning disable CS8604
 #endif
       // converts the TRX file using LiquidTestReports
-      var generated = await ConvertAsync(
+      var generatedContent = await ConvertAsync(
         trxFile: fileArtifact.FileInfo,
         templateFile: templateFile,
         outputFile: outputFile,
@@ -223,7 +229,7 @@ internal sealed class LiquidTestReportsConverter :
 #pragma warning restore CS8604
 #endif
 
-      if (!generated || !outputFile.Exists) {
+      if (string.IsNullOrEmpty(generatedContent) || !outputFile.Exists) {
         await outputDevice.DisplayAsync(
           this,
           new ErrorMessageOutputDeviceData(message: "LiquidTestReports generated no content"),
@@ -243,6 +249,14 @@ internal sealed class LiquidTestReportsConverter :
         cancellationToken
       ).ConfigureAwait(false);
 
+      if (appendGitHubStepSummary) {
+        await GitHubActions.AppendStepSummaryAsync(
+          contents: generatedContent!,
+          displayOutputDeviceAsync: DisplayOutputDeviceAsync,
+          cancellationToken: cancellationToken
+        ).ConfigureAwait(false);
+      }
+
       await messageBus.PublishAsync(
         this,
         new SessionFileArtifact(
@@ -258,7 +272,17 @@ internal sealed class LiquidTestReportsConverter :
     }
   }
 
-  private async Task<bool> ConvertAsync(
+  private Task DisplayOutputDeviceAsync(
+    IOutputDeviceData data,
+    CancellationToken cancellationToken
+  )
+    => outputDevice.DisplayAsync(
+      producer: this,
+      data: data,
+      cancellationToken: cancellationToken
+    );
+
+  private async Task<string?> ConvertAsync(
     FileInfo trxFile,
     FileInfo templateFile,
     FileInfo outputFile,
@@ -307,7 +331,7 @@ internal sealed class LiquidTestReportsConverter :
     ).ConfigureAwait(false);
 
     if (string.IsNullOrEmpty(generatedReportContent))
-      return false; // error: generated no content
+      return null; // error: generated no content
 
     // ensure the directory for the output file exists
     if (generatedFile.Directory is DirectoryInfo directory)
@@ -336,7 +360,7 @@ internal sealed class LiquidTestReportsConverter :
       ).ConfigureAwait(false);
     }
 
-    return true;
+    return generatedReportContent;
   }
 
   private static async Task<(string ReportContent, IList<Exception> GeneratorErrors)> GenerateReportAsync(
