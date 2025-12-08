@@ -1,7 +1,7 @@
-// Smdn.Extensions.Mtp.LiquidTestReports.dll (Smdn.Extensions.Mtp.LiquidTestReports-1.0.0-preview2)
+// Smdn.Extensions.Mtp.LiquidTestReports.dll (Smdn.Extensions.Mtp.LiquidTestReports-1.0.0-preview3)
 //   Name: Smdn.Extensions.Mtp.LiquidTestReports
 //   AssemblyVersion: 1.0.0.0
-//   InformationalVersion: 1.0.0-preview2+bb0a390b2d48625d6ca3901922b13a6a573052df
+//   InformationalVersion: 1.0.0-preview3+763fd67a2fa1b6d778239e2af459dfa867c9eb6e
 //   TargetFramework: .NETCoreApp,Version=v10.0
 //   Configuration: Release
 //   Referenced assemblies:
@@ -13,7 +13,9 @@
 //     System.ComponentModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 //     System.Console, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 //     System.Linq, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+//     System.Memory, Version=10.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51
 //     System.Runtime, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
+//     System.Threading, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 //     System.Xml.ReaderWriter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 //     System.Xml.XmlSerializer, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 #nullable enable annotations
