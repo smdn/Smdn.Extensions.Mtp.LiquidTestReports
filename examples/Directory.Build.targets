@@ -1,0 +1,27 @@
+<!--
+SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Project InitialTargets="ReplaceSmdnExtensionsMtpLiquidTestReportsPackageReferencesToProjectReferences">
+  <!-- Replace PackageReference to ProjectReference of the local project -->
+  <Target
+    Name="ReplaceSmdnExtensionsMtpLiquidTestReportsPackageReferencesToProjectReferences"
+    Condition=" '$(UseLocalProjectInsteadOfPublishedPackage)' == 'true' "
+  >
+    <ItemGroup>
+      <_SmdnExtensionsMtpLiquidTestReportsReference
+        Include="@(PackageReference)"
+        Condition="$([System.String]::new('%(Identity)').StartsWith('Smdn.Extensions.Mtp.LiquidTestReports'))"
+        ProjectPath="$(MSBuildThisFileDirectory)..\src\%(Identity)\%(Identity).csproj"
+      />
+    </ItemGroup>
+
+    <ItemGroup>
+      <!-- Remove package references to Smdn.Extensions.Mtp.LiquidTestReports.* -->
+      <PackageReference Remove="@(_SmdnExtensionsMtpLiquidTestReportsReference)" />
+
+      <!-- Include project reference to Smdn.Extensions.Mtp.LiquidTestReports.* -->
+      <ProjectReference Include="%(_SmdnExtensionsMtpLiquidTestReportsReference.ProjectPath)"/>
+    </ItemGroup>
+  </Target>
+</Project>

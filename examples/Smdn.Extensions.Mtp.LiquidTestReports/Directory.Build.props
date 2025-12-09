@@ -1,0 +1,13 @@
+<!--
+SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Project>
+  <Import Project="$(MSBuildThisFileDirectory)..\Directory.Build.props"/>
+
+  <!-- When using an extension built from source, load the props file to enable the extension.-->
+  <Import
+    Project="$(MSBuildThisFileDirectory)..\..\src\Smdn.Extensions.Mtp.LiquidTestReports\buildMultiTargeting\Smdn.Extensions.Mtp.LiquidTestReports.props"
+    Condition="'$(UseLocalProjectInsteadOfPublishedPackage)' == 'true'"
+  />
+</Project>
