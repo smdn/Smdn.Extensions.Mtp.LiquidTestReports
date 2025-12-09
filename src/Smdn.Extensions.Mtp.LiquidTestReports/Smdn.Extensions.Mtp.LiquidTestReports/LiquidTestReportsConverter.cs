@@ -58,6 +58,7 @@ internal sealed class LiquidTestReportsConverter :
   private readonly FileInfo? templateFile;
   private readonly string? outputFileExtension;
   private readonly bool appendGitHubStepSummary;
+  private readonly bool enableTrxProducerChecking;
   private readonly Dictionary<string, string> templateParameters = new(Template.NamingConvention.StringComparer);
 
   private SessionUid? sessionUid;
@@ -82,6 +83,10 @@ internal sealed class LiquidTestReportsConverter :
     templateFile = null;
     outputFileExtension = null;
     appendGitHubStepSummary = false;
+
+    enableTrxProducerChecking = !commandLineOptionsService.IsOptionSet(
+      LiquidTestReportsGeneratorCommandLine.LiquidTestReportsDisableTrxProducerCheckingOptionName
+    );
 
     if (
       commandLineOptionsService.TryGetOptionArgumentList(
@@ -197,7 +202,7 @@ internal sealed class LiquidTestReportsConverter :
       return;
 
     // expects the SessionFileArtifact produced by the assembly 'Microsoft.Testing.Extensions.TrxReport'
-    if (dataProducer.GetType().Assembly != typeof(TrxReportExtensions).Assembly)
+    if (enableTrxProducerChecking && dataProducer.GetType().Assembly != typeof(TrxReportExtensions).Assembly)
       return;
 
     // expects the SessionFileArtifact that represents a generated TRX file
