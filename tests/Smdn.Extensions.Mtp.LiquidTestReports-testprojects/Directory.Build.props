@@ -12,7 +12,7 @@ SPDX-License-Identifier: MIT
   </ItemGroup>
 
   <ItemGroup Condition="'$(TestReleasedPackage)' == 'true'">
-    <PackageReference Include="Smdn.Extensions.Mtp.LiquidTestReports" Version="1.0.0-preview3" />
+    <PackageReference Include="Smdn.Extensions.Mtp.LiquidTestReports" Version="1.0.0-rc" />
   </ItemGroup>
 </Project>
 
