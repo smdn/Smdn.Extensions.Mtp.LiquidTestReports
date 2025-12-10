@@ -5,14 +5,8 @@ SPDX-License-Identifier: MIT
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks Condition=" '$(EnableTargetFrameworkDotNet100)' == 'true' ">net10.0;$(TargetFrameworks)</TargetFrameworks>
-    <!-- <TargetFrameworks Condition=" '$(EnableTargetFrameworkDotNet80)' == 'true' ">net8.0;$(TargetFrameworks)</TargetFrameworks> -->
-    <!-- <TargetFrameworks Condition=" '$(EnableTargetFrameworkNetFx)' == 'true' ">$(TargetFrameworks)</TargetFrameworks> -->
-
-    <!-- To avoid concurrent access to files in the test target project, disable parallel testing per TFMs. -->
-    <TestTfmsInParallel>false</TestTfmsInParallel>
-
-    <!-- suppress warning CS2002 caused by the target 'WriteTestProjectInfo' -->
-    <NoWarn>CS2002;$(NoWarn)</NoWarn>
+    <TargetFrameworks Condition=" '$(EnableTargetFrameworkDotNet80)' == 'true' ">net8.0;$(TargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(EnableTargetFrameworkNetFx)' == 'true' ">$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -26,31 +20,5 @@ SPDX-License-Identifier: MIT
     <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="2.0.2" />
     <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.0.2" />
     <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.0.2" />
-    <PackageReference Include="Smdn.Fundamental.Shell" Version="3.1.0" />
   </ItemGroup>
-
-  <Target Name="WriteTestProjectInfo" BeforeTargets="BeforeBuild">
-    <PropertyGroup>
-      <TestProjectInfoFilePath>$(MSBuildThisFileDirectory)TestProjectInfo.g.cs</TestProjectInfoFilePath>
-      <TestProjectInfo_TestReleasedPackage>false</TestProjectInfo_TestReleasedPackage>
-      <TestProjectInfo_TestReleasedPackage Condition="'$(TestReleasedPackage)' == 'true'">true</TestProjectInfo_TestReleasedPackage>
-      <TestProjectInfoFileContent><![CDATA[
-internal static class TestProjectInfo {
-  public const string RootDirectory = @"$(MSBuildThisFileDirectory)..\Smdn.Extensions.Mtp.LiquidTestReports-testprojects\"%3B
-  public const bool TestReleasedPackage = $(TestProjectInfo_TestReleasedPackage)%3B
-}
-]]></TestProjectInfoFileContent>
-    </PropertyGroup>
-
-    <WriteLinesToFile
-      File="$(TestProjectInfoFilePath)"
-      Overwrite="true"
-      Lines="$(TestProjectInfoFileContent)"
-    />
-
-    <ItemGroup>
-      <!-- XXX: This causes compiler warning CS2002. -->
-      <Compile Include="$(TestProjectInfoFilePath)" Visible="false" AutoGen="true" />
-    </ItemGroup>
-  </Target>
 </Project>
