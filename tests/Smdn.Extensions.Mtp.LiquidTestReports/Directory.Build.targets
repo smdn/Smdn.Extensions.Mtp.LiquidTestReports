@@ -1,0 +1,18 @@
+<!--
+SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Project>
+  <Import Project="$(MSBuildThisFileDirectory)..\Directory.Build.targets" />
+
+  <ItemGroup>
+    <!--
+      To avoid conflicts with the <ProjectReference> of the test target project,
+      remove the <PackageReference> implicitly included from `Smdn.MSBuild.ProjectAssets.Library`.
+    -->
+    <PackageReference
+      Remove="Smdn.Extensions.Mtp.LiquidTestReports"
+      Condition=" '$(TestReleasedPackage)' != 'true' "
+    />
+  </ItemGroup>
+</Project>
