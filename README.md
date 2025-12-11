@@ -7,6 +7,16 @@
 
 The [Microsoft.Testing.Platform extension](https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-extensions) to convert TRX files generated during the test session into the preferred format using [LiquidTestReports](https://github.com/kurtmkurtm/LiquidTestReports), the [Liquid template language](https://shopify.github.io/liquid/) processor.
 
+To generate and convert a test report, specify at least the following three required options as arguments to `dotnet test`.
+
+```
+dotnet test --report-trx --report-trx-filename TestResult.trx --liquidtr-template TestResult.template.md
+```
+
+For details on each option, refer to the output of `dotnet test --help`.
+
+For instructions on configuring test projects in NUnit and MSTest, refer to the [examples](./examples/Smdn.Extensions.Mtp.LiquidTestReports/) directory.
+
 > [!NOTE]
 > `Smdn.Extensions.Mtp.LiquidTestReports` is currently only available as a pre-release version. This is due to the reason that the final release version of [LiquidTestReports.Core](https://www.nuget.org/packages/LiquidTestReports.Core/) v2, one of its dependency packages, has not yet been released.
 > The versions of the `Smdn.Extensions.Mtp.LiquidTestReports` package currently available that have the suffix `-rc` can be used as release versions.
