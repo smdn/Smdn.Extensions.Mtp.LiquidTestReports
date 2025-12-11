@@ -486,18 +486,19 @@ public class LiquidTestReportsConverterTests {
     var stepSummaryFile = isEnvVarSet
       ? new FileInfo(GetFilePathForTestCase($"{nameof(GITHUB_STEP_SUMMARY)}-{enableOption}-{isEnvVarSet}", TemplateFileExtension))
       : null;
-    string? initialValueOfEnvVar = null;
+    var initialValueOfEnvVar = Environment.GetEnvironmentVariable(GITHUB_STEP_SUMMARY);
 
     try {
       if (isEnvVarSet) {
-        initialValueOfEnvVar = Environment.GetEnvironmentVariable(GITHUB_STEP_SUMMARY);
-
         Environment.SetEnvironmentVariable(GITHUB_STEP_SUMMARY, stepSummaryFile!.FullName);
 
         await File.WriteAllTextAsync(
           path: stepSummaryFile.FullName,
           contents: InitialStepSummaryFileContents
         ).ConfigureAwait(false);
+      }
+      else {
+        Environment.SetEnvironmentVariable(GITHUB_STEP_SUMMARY, null);
       }
 
       await RunTestApplicationWithDefaultConfigurations(
@@ -548,8 +549,7 @@ public class LiquidTestReportsConverterTests {
       ).ConfigureAwait(false);
     }
     finally {
-      if (isEnvVarSet)
-        Environment.SetEnvironmentVariable(GITHUB_STEP_SUMMARY, initialValueOfEnvVar);
+      Environment.SetEnvironmentVariable(GITHUB_STEP_SUMMARY, initialValueOfEnvVar);
     }
   }
 }
