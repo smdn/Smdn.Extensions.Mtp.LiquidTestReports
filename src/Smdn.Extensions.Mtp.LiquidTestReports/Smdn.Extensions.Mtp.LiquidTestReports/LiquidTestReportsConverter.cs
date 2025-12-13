@@ -244,16 +244,6 @@ internal sealed class LiquidTestReportsConverter :
         return;
       }
 
-      await outputDevice.DisplayAsync(
-        this,
-        new FormattedTextOutputDeviceData(
-          string.Format(CultureInfo.InvariantCulture, "LiquidTestReports file output: {0}", outputFile)
-        ) {
-          ForegroundColor = new SystemConsoleColor { ConsoleColor = ConsoleColor.DarkGreen },
-        },
-        cancellationToken
-      ).ConfigureAwait(false);
-
       if (appendGitHubStepSummary) {
         await GitHubActions.AppendStepSummaryAsync(
           contents: generatedContent!,
