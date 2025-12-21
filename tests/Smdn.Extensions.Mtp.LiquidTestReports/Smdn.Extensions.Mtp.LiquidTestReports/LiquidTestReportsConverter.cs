@@ -166,7 +166,7 @@ public class LiquidTestReportsConverterTests {
         Assert.That(
           await application.RunAsync(),
           Is.EqualTo(MtpTestApplicationExitCodes.ZeroTests),
-          "Application must be exit without any errors."
+          "Application must exit without any errors."
         );
         Assert.That(
           trxFile.FullName,
@@ -195,7 +195,7 @@ public class LiquidTestReportsConverterTests {
         Assert.That(
           await application.RunAsync(),
           Is.EqualTo(MtpTestApplicationExitCodes.ZeroTests),
-          "Application must be exit without any errors."
+          "Application must exit without any errors."
         );
         Assert.That(
           trxFile.FullName,
@@ -233,7 +233,7 @@ public class LiquidTestReportsConverterTests {
         Assert.That(
           await application.RunAsync(),
           Is.EqualTo(MtpTestApplicationExitCodes.ZeroTests),
-          "Application must be exit without any errors."
+          "Application must exit without any errors."
         );
         Assert.That(
           trxFile.FullName,
@@ -265,7 +265,7 @@ public class LiquidTestReportsConverterTests {
         Assert.That(
           await application.RunAsync(),
           Is.EqualTo(MtpTestApplicationExitCodes.ZeroTests),
-          "Application must be exit without any errors."
+          "Application must exit without any errors."
         );
         Assert.That(
           trxFile.FullName,
@@ -301,7 +301,7 @@ public class LiquidTestReportsConverterTests {
         Assert.That(
           await application.RunAsync(),
           Is.EqualTo(MtpTestApplicationExitCodes.ZeroTests),
-          "Application must be exit without any errors."
+          "Application must exit without any errors."
         );
         Assert.That(
           trxFile.FullName,
@@ -444,7 +444,7 @@ public class LiquidTestReportsConverterTests {
         Assert.That(
           await application.RunAsync(),
           Is.EqualTo(MtpTestApplicationExitCodes.ZeroTests),
-          "Application must be exit without any errors."
+          "Application must exit without any errors."
         );
         Assert.That(
           trxFile.FullName,
@@ -513,7 +513,7 @@ public class LiquidTestReportsConverterTests {
           Assert.That(
             await application.RunAsync(),
             Is.EqualTo(MtpTestApplicationExitCodes.ZeroTests),
-            "Application must be exit without any errors."
+            "Application must exit without any errors."
           );
           Assert.That(
             trxFile.FullName,
