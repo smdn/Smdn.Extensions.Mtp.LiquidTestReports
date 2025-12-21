@@ -10,7 +10,6 @@ using System.Collections.Generic;
 #if SYSTEM_DIAGNOSTICS_CODEANALYSIS_MEMBERNOTNULLWHENATTRIBUTE
 using System.Diagnostics.CodeAnalysis;
 #endif
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
