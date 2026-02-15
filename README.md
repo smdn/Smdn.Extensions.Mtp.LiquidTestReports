@@ -32,7 +32,7 @@ IssueやPull Requestを送る際は、[Contribution guidelines](./CONTRIBUTING.m
 ## License
 This project is licensed under the terms of the [MIT License](./LICENSE.txt).
 
-## Credit
+## Credits
 This project incorporates implementations partially ported from the following projects. See also [ThirdPartyNotices.md](./ThirdPartyNotices.md) for detail.
 
 - [DotLiquid](https://github.com/dotliquid/dotliquid)
