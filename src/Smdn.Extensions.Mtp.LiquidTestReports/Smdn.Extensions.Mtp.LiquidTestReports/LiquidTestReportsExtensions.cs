@@ -36,6 +36,6 @@ public static class LiquidTestReportsExtensions {
       );
 
     builder.TestHost.AddDataConsumer(compositeTestSessionLiquidTestReportsConverterService);
-    builder.TestHost.AddTestSessionLifetimeHandle(compositeTestSessionLiquidTestReportsConverterService);
+    builder.TestHost.AddTestSessionLifetimeHandler(compositeTestSessionLiquidTestReportsConverterService);
   }
 }

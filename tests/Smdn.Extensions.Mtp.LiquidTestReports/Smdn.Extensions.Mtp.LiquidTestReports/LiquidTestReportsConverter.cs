@@ -94,7 +94,7 @@ public class LiquidTestReportsConverterTests {
       args: arguments
     ).ConfigureAwait(false);
 
-    applicationBuilder.TestHost.AddTestSessionLifetimeHandle(
+    applicationBuilder.TestHost.AddTestSessionLifetimeHandler(
       static serviceProvider => new PseudoTrxGenerator(
         messageBus: serviceProvider.GetMessageBus()
       )
