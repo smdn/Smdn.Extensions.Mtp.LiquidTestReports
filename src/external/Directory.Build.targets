@@ -1,0 +1,9 @@
+﻿<!--
+SPDX-FileCopyrightText: 2026 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<!--
+  Prevent the importing of Directory.Build.targets located in a superior directory.
+  This is necessary to build the library with its original configuration.
+-->
+<Project/>

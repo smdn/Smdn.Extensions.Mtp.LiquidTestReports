@@ -1,0 +1,50 @@
+{
+  "DTDVersion": "3.0",
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "LiquidTestReports.Core-InternalEmbeddedComponent",
+  "documentNamespace": "https://github.com/smdn/Smdn.Extensions.Mtp.LiquidTestReports/blob/main/src/external/LiquidTestReports.Core.spdx.json",
+  "creationInfo": {
+    "comment": "This document describes the third-party component embedded within the Smdn.Extensions.Mtp.LiquidTestReports repository.",
+    "creators": [
+      "Person: smdn"
+    ],
+    "created": "2026-05-25T00:00:00+09:00"
+  },
+  "comment": "This file tracks the embedded source code copied from kurtmkurtm/LiquidTestReports to fix upstream issues and use internally.",
+  "packages": [
+    {
+      "name": "LiquidTestReports.Core",
+      "SPDXID": "SPDXRef-Package-LiquidTestReports-Core",
+      "versionInfo": "master-1f39c20",
+      "downloadLocation": "git+https://github.com/kurtmkurtm/LiquidTestReports.git@1f39c20cec7aa06f50f88843ebe99f58f7ead3c5",
+      "packageFileName": "src/LiquidTestReports.Core",
+      "originator": "Person: Kurt",
+      "supplier": "Person: Kurt",
+      "filesAnalyzed": false,
+      "licenseConcluded": "BSD-2-Clause",
+      "licenseDeclared": "BSD-2-Clause",
+      "licenseInfoFromFiles": [
+        "BSD-2-Clause"
+      ],
+      "copyrightText": "Copyright (c) 2020, Kurt",
+      "summary": "An embedded part of kurtmkurtm/LiquidTestReports, copied and modified internally by the host project.",
+      "homepage": "https://github.com/kurtmkurtm/LiquidTestReports",
+      "externalRefs": [
+        {
+          "referenceCategory": "VCS",
+          "referenceType": "git",
+          "referenceLocator": "git+https://github.com/kurtmkurtm/LiquidTestReports.git@1f39c20cec7aa06f50f88843ebe99f58f7ead3c5"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Package-LiquidTestReports-Core"
+    }
+  ]
+}

@@ -29,14 +29,31 @@ SPDX-License-Identifier: MIT
   </PropertyGroup>
 
   <PropertyGroup Label="package properties">
+    <PackageLicenseExpression/>
+    <PackageLicenseFile>LICENSE_BUNDLE.txt</PackageLicenseFile>
     <PackageTags>testing;unittesting;extensions;MTP;Microsoft.Testing.Platform;TRX;templating;testreport</PackageTags>
     <GenerateNupkgReadmeFileDependsOnTargets>$(GenerateNupkgReadmeFileDependsOnTargets);GenerateReadmeFileContent</GenerateNupkgReadmeFileDependsOnTargets>
+
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);PopulateDependingAssembliesToPackage</TargetsForTfmSpecificContentInPackage>
+    <!--
+      Needs alternative of nuget.exe's -IncludeReferencedProjects option: https://github.com/NuGet/Home/issues/3891
+      Here, we use workaround 'PopulateDependingAssembliesToPackage' target instead.
+    -->
+    <!-- <IncludeReferencedProjects>true</IncludeReferencedProjects> -->
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="LICENSE_BUNDLE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotLiquid" Version="2.3.197" />
-    <PackageReference Include="LiquidTestReports.Core" Version="2.0.0-beta.6" />
     <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.2.1" />
+    <!-- <PackageReference Include="LiquidTestReports.Core" Version="2.0.0-beta.6" /> -->
+    <ProjectReference
+      Include="$(MSBuildThisFileDirectory)..\external\LiquidTestReports.Core\LiquidTestReports.Core.csproj"
+      PrivateAssets="all"
+    />
   </ItemGroup>
 
   <ItemGroup>
@@ -112,4 +129,6 @@ internal static class ExtensionInfo {
       <Compile Include="$(MtpExtensionInfoFilePath)" Visible="false" AutoGen="true" />
     </ItemGroup>
   </Target>
+
+  <Import Project="PopulateDependingAssembliesToPackage.targets" />
 </Project>
