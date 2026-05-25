@@ -25,6 +25,7 @@ using System.Xml.Serialization;
 using DotLiquid;
 
 using LiquidTestReports.Core;
+using LiquidTestReports.Core.Adapters;
 using LiquidTestReports.Core.Drops;
 using LiquidTestReports.Core.Models;
 
@@ -376,12 +377,10 @@ internal sealed class LiquidTestReportsConverter :
     foreach (var file in reportInput.Files) {
       var results = await LoadTrxAsync(file, cancellationToken).ConfigureAwait(false);
 
-      // TrxMapper exists in the 'LiquidTestReports.Cli'' namespace and yet
-      // is implemented in the assembly LiquidTestReports.Core.
-      global::LiquidTestReports.Cli.adapters.TrxMapper.Map(results, testRunDrop, reportInput);
+      TrxMapper.Map(results, testRunDrop, reportInput);
     }
 
-    var reportGenerator = new ReportGeneratorWrapper(
+    var reportGenerator = new ReportGenerator(
       new LibraryTestRun {
         Run = testRunDrop,
         Library = libraryDrop,
