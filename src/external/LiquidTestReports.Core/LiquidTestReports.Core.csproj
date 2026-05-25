@@ -8,10 +8,7 @@ SPDX-License-Identifier: BSD-2-Clause
     <AssemblyName>LiquidTestReports.Core</AssemblyName>
     <TargetFrameworks>netstandard2.0;net8.0;net9.0</TargetFrameworks>
     <RepositoryUrl>https://github.com/kurtmkurtm/LiquidTestReports</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/kurtmkurtm/LiquidTestReports</PackageProjectUrl>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageIcon>nuget_core.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DotLiquid" Version="2.2.692" />
@@ -27,24 +24,9 @@ SPDX-License-Identifier: BSD-2-Clause
       <_Parameter1>LiquidTestReports.Core.Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\assets\nuget_core.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="README.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
   <PropertyGroup Label="Configuration">
     <RootNamespace>LiquidTestReports.Core</RootNamespace>
     <Authors>Kurt Murrell</Authors>
-    <PackageId>LiquidTestReports.Core</PackageId>
     <Product>LiquidTestReports.Core</Product>
     <Copyright>2024</Copyright>
     <Description>Core library for creating custom VS Test loggers with liquid template support</Description>
