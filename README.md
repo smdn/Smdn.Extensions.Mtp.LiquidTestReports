@@ -17,10 +17,6 @@ For details on each option, refer to the output of `dotnet test --help`.
 
 For instructions on configuring test projects in NUnit and MSTest, refer to the [examples](./examples/Smdn.Extensions.Mtp.LiquidTestReports/) directory.
 
-> [!NOTE]
-> `Smdn.Extensions.Mtp.LiquidTestReports` is currently only available as a pre-release version. This is due to the reason that the final release version of [LiquidTestReports.Core](https://www.nuget.org/packages/LiquidTestReports.Core/) v2, one of its dependency packages, has not yet been released.
-> The versions of the `Smdn.Extensions.Mtp.LiquidTestReports` package currently available that have the suffix `-rc` can be used as release versions.
-
 # For contributors
 Contributions are appreciated!
 
@@ -32,9 +28,20 @@ IssueやPull Requestを送る際は、[Contribution guidelines](./CONTRIBUTING.m
 ## License
 This project is licensed under the terms of the [MIT License](./LICENSE.txt).
 
+However, the final published NuGet package incorporates a compiled third-party component (`LiquidTestReports.Core`) under the **BSD 2-Clause License**.
+- A comprehensive license file combining both terms is available in [LICENSE_BUNDLE.txt](./src/Smdn.Extensions.Mtp.LiquidTestReports/LICENSE_BUNDLE.txt) (packaged as `LICENSE_BUNDLE.txt` inside the NuGet artifact).
+- Detailed license distributions and copyright statements are also maintained in [ThirdPartyNotices.md](./ThirdPartyNotices.md).
+
 ## Credits
-This project incorporates implementations partially ported from the following projects. See also [ThirdPartyNotices.md](./ThirdPartyNotices.md) for detail.
+This project incorporates implementations ported and vendored from the following project:
+
+- [LiquidTestReports](https://github.com/kurtmkurtm/LiquidTestReports)
+
+  The source code of `src/LiquidTestReports.Core` is integrated, locally modified, and compiled internally within this repository. Detailed metadata regarding the baseline upstream commit, rationales for modification, and file exclusions are documented in [src/external/README.md](./src/external/README.md).
+
+This project uses the following components as external package dependencies:
 
 - [DotLiquid](https://github.com/dotliquid/dotliquid)
-- [LiquidTestReports](https://github.com/kurtmkurtm/LiquidTestReports)
 - [Microsoft.Testing.Platform, Microsoft.Testing.Extensions.TrxReport](https://github.com/microsoft/testfx)
+
+See also [ThirdPartyNotices.md](./ThirdPartyNotices.md) for detail.
