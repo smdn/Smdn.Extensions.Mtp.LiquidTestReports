@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<!--
+SPDX-FileCopyrightText: 2020 Kurt
+SPDX-FileCopyrightText: 2026 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: BSD-2-Clause
+-->
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyName>LiquidTestReports.Core</AssemblyName>
@@ -13,9 +17,7 @@
     <PackageReference Include="DotLiquid" Version="2.2.692" />
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.11.1" />
     <PackageReference Include="NuGet.Frameworks" Version="6.12.1" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="$(TargetFramework.StartsWith('netstandard'))" />
   </ItemGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
