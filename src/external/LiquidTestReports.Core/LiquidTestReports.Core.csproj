@@ -4,18 +4,13 @@ SPDX-FileCopyrightText: 2026 smdn <smdn@smdn.jp>
 SPDX-License-Identifier: BSD-2-Clause
 -->
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="$(MSBuildThisFileDirectory)..\LiquidTestReports.Core.PackageReferences.props"/>
   <PropertyGroup>
     <AssemblyName>LiquidTestReports.Core</AssemblyName>
     <TargetFrameworks>netstandard2.0;net8.0;net10.0</TargetFrameworks>
     <RepositoryUrl>https://github.com/kurtmkurtm/LiquidTestReports</RepositoryUrl>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="DotLiquid" Version="2.2.692" />
-    <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="17.11.1" />
-    <PackageReference Include="NuGet.Frameworks" Version="6.12.1" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="$(TargetFramework.StartsWith('netstandard'))" />
-  </ItemGroup>
   <PropertyGroup Label="Configuration">
     <RootNamespace>LiquidTestReports.Core</RootNamespace>
     <Authors>Kurt Murrell</Authors>
