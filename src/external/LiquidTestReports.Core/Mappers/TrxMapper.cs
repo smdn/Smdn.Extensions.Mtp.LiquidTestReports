@@ -1,4 +1,8 @@
-﻿using System;
+﻿// SPDX-FileCopyrightText: 2020 Kurt
+// SPDX-FileCopyrightText: 2026 smdn <smdn@smdn.jp>
+// SPDX-License-Identifier: BSD-2-Clause
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,7 +13,7 @@ using LiquidTestReports.Core.Models;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Schemas.VisualStudio.TeamTest;
 
-namespace LiquidTestReports.Cli.adapters
+namespace LiquidTestReports.Core.Adapters
 {
     /// <summary>
     /// Mapping for deserialised TRX types to drop model types
