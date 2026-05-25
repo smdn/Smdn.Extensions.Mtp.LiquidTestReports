@@ -1,4 +1,7 @@
-﻿using System;
+﻿// SPDX-FileCopyrightText: 2020 Kurt
+// SPDX-FileCopyrightText: 2026 smdn <smdn@smdn.jp>
+// SPDX-License-Identifier: BSD-2-Clause
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
@@ -13,7 +16,7 @@ namespace LiquidTestReports.Core
     /// <summary>
     /// Generates reports from test results using liquid templates.
     /// </summary>
-    internal class ReportGenerator
+    public class ReportGenerator
     {
         private readonly Hash _context;
 
@@ -40,7 +43,7 @@ namespace LiquidTestReports.Core
         /// <param name="run">Completed test results.</param>
         /// <param name="parameters">Test parameters.</param>
         /// <param name="library">User parameters.</param>
-        internal ReportGenerator(LibraryTestRun libraryTestRun)
+        public ReportGenerator(LibraryTestRun libraryTestRun)
         {
             _context = Hash.FromAnonymousObject(libraryTestRun);
         }
@@ -50,7 +53,7 @@ namespace LiquidTestReports.Core
         /// </summary>
         /// <param name="templateString">Liquid template.</param>
         /// <returns>Generated content.</returns>
-        internal string GenerateReport(string templateString, out IList<Exception> renderingErrors)
+        public string GenerateReport(string templateString, out IList<Exception> renderingErrors)
         {
             renderingErrors = new List<Exception>();
 
