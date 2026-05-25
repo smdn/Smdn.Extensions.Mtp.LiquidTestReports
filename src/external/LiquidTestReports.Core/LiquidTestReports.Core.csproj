@@ -16,14 +16,6 @@ SPDX-License-Identifier: BSD-2-Clause
     <PackageReference Include="NuGet.Frameworks" Version="6.12.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" Condition="$(TargetFramework.StartsWith('netstandard'))" />
   </ItemGroup>
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>LiquidTestReports.Cli</_Parameter1>
-    </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>LiquidTestReports.Core.Tests</_Parameter1>
-    </AssemblyAttribute>
-  </ItemGroup>
   <PropertyGroup Label="Configuration">
     <RootNamespace>LiquidTestReports.Core</RootNamespace>
     <Authors>Kurt Murrell</Authors>
