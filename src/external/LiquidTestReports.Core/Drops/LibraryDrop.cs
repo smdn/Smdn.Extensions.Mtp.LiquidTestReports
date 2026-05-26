@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿// SPDX-FileCopyrightText: 2020 Kurt
+// SPDX-FileCopyrightText: 2026 smdn <smdn@smdn.jp>
+// SPDX-License-Identifier: BSD-2-Clause
+
+using System.Collections.Generic;
 using DotLiquid;
 
 namespace LiquidTestReports.Core.Drops
@@ -7,8 +11,8 @@ namespace LiquidTestReports.Core.Drops
     {
         public IDictionary<string, object> Parameters { get; set;  }
 
-        public string Text => Constants.LibraryText;
+        public virtual string Text => Constants.LibraryText;
 
-        public string Link => Constants.LibraryLink;
+        public virtual string Link => Constants.LibraryLink;
     }
 }
