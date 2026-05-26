@@ -91,7 +91,7 @@ dotnet test --report-trx --report-trx-filename TestResult.trx --liquidtr-templat
 
 For details on each option, please refer to the output of `dotnet test --help`.
 
-Examples of project configurations for each test framework can be found on the [GitHub repository]($(RepositoryUrl)/tree/main/examples/$(PackageId)/).
+Examples of project configurations for each test framework can be found on the [GitHub repository]($(RepositoryUrl)/tree/$(SmdnWorkflowsDotNetExpectedReleaseTag)/examples/$(PackageId)/).
 
 ## Contributing
 This project welcomes contributions, feedbacks and suggestions. You can contribute to this project by submitting [Issues]($(RepositoryUrl)/issues/new/choose) or [Pull Requests]($(RepositoryUrl)/pulls/) on the [GitHub repository]($(RepositoryUrl)).
