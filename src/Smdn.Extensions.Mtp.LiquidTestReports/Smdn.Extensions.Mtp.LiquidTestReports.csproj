@@ -7,18 +7,12 @@ SPDX-License-Identifier: MIT
 
   <PropertyGroup>
     <TargetFrameworks>net10.0;net8.0;netstandard2.0</TargetFrameworks>
-    <VersionPrefix>1.0.1</VersionPrefix>
-    <!--
-      LiquidTestReports.Core v2 is only available as a pre-release version,
-      which results in the NU5104 warning during packaging.
-      Until the release package is published, this package will also be released
-      as a pre-release package by adding the suffix '-rc'.
-    -->
-    <VersionSuffix>rc</VersionSuffix>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionSuffix>preview1</VersionSuffix>
     <IsPackable>true</IsPackable>
     <IsTrimmable>false</IsTrimmable>
     <IsAotCompatible>false</IsAotCompatible>
-    <!-- <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion> -->
+    <!-- <PackageValidationBaselineVersion>1.1.0</PackageValidationBaselineVersion> -->
     <NoWarn>CS1591;$(NoWarn)</NoWarn> <!-- CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member' -->
     <MtpExtensionDisplayName>LiquidTestReports test report converter</MtpExtensionDisplayName>
   </PropertyGroup>
