@@ -177,14 +177,16 @@ internal sealed class LiquidTestReportsConverter :
   public Task<bool> IsEnabledAsync() => isEnabledTask;
 
   /// <inheritdoc />
-  public async Task OnTestSessionStartingAsync(ITestSessionContext testSessionContext)
+  public Task OnTestSessionStartingAsync(ITestSessionContext testSessionContext)
   {
     if (!IsEnabled)
-      return;
+      return Task.CompletedTask;
     if (testSessionContext.CancellationToken.IsCancellationRequested)
-      return;
+      return Task.FromCanceled(testSessionContext.CancellationToken);
 
     sessionUid = testSessionContext.SessionUid;
+
+    return Task.CompletedTask;
   }
 
   /// <inheritdoc />
