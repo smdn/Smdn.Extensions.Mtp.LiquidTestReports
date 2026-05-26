@@ -113,6 +113,7 @@ internal static class ExtensionInfo {
   public const string SemVer = "$(Version)"%3B
   public const string Description = "$(Description)"%3B
   public const string DisplayName = "$(MtpExtensionDisplayName)"%3B
+  public const string RepositoryUrl = "$(RepositoryUrl)"%3B
 }
 ]]></MtpExtensionInfoFileContent>
     </PropertyGroup>

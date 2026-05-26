@@ -303,7 +303,7 @@ internal sealed class LiquidTestReportsConverter :
     var (generatedReportContent, generatorErrors) = await GenerateReportAsync(
       reportInput: new LiquidTestReportsTrxInput(trxFile),
       templateFile: templateFile,
-      libraryDrop: new LibraryDrop() {
+      libraryDrop: new LiquidTestReportsLibraryDrop() {
         Parameters =
 #if SYSTEM_COLLECTIONS_OBJECTMODEL_READONLYDICTIONARY_EMPTY
           System.Collections.ObjectModel.ReadOnlyDictionary<string, object>.Empty,
