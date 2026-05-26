@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2026 smdn <smdn@smdn.jp>
+# SPDX-License-Identifier: MIT
+#
+# EditorConfig is awesome: https://EditorConfig.org
+#
+
+# To prevent settings from the parent directory from being inherited,
+# define the root at this level.
+root = true
+
+# To preserve the original formatting, nothing other than character
+# encoding and line breaks is specified.
+[*.cs]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+[*.{csproj,props,targets}]
+charset = utf-8-bom
+end_of_line = crlf
