@@ -25,6 +25,7 @@ If there's a feature you would like to add or a bug you would like to fix, pleas
 IssueやPull Requestを送る際は、[Contribution guidelines](./CONTRIBUTING.md)をご覧頂ください。　可能なら英語が望ましいですが、日本語で構いません。
 
 # Notice
+<!-- #pragma section-start NupkgReadmeFile_Notice -->
 ## License
 This project is licensed under the terms of the [MIT License](./LICENSE.txt).
 
@@ -45,3 +46,4 @@ This project uses the following components as external package dependencies:
 - [Microsoft.Testing.Platform, Microsoft.Testing.Extensions.TrxReport](https://github.com/microsoft/testfx)
 
 See also [ThirdPartyNotices.md](./ThirdPartyNotices.md) for detail.
+<!-- #pragma section-end NupkgReadmeFile_Notice -->
