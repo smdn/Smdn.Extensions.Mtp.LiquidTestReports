@@ -248,7 +248,12 @@ internal sealed class LiquidTestReportsConverter :
 
       if (appendGitHubStepSummary) {
         await GitHubActions.AppendStepSummaryAsync(
-          contents: generatedContent!,
+          contents:
+#if SYSTEM_DIAGNOSTICS_CODEANALYSIS_MEMBERNOTNULLWHENATTRIBUTE
+            generatedContent,
+#else
+            generatedContent!,
+#endif
           displayOutputDeviceAsync: DisplayOutputDeviceAsync,
           cancellationToken: cancellationToken
         ).ConfigureAwait(false);
