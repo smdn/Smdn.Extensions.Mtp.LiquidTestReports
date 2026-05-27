@@ -8,7 +8,7 @@ SPDX-License-Identifier: MIT
   <PropertyGroup>
     <TargetFrameworks>net10.0;net8.0;netstandard2.0</TargetFrameworks>
     <VersionPrefix>1.1.0</VersionPrefix>
-    <VersionSuffix>preview1</VersionSuffix>
+    <VersionSuffix></VersionSuffix>
     <IsPackable>true</IsPackable>
     <IsTrimmable>false</IsTrimmable>
     <IsAotCompatible>false</IsAotCompatible>
@@ -48,6 +48,7 @@ SPDX-License-Identifier: MIT
     <ProjectReference
       Include="$(MSBuildThisFileDirectory)..\external\LiquidTestReports.Core\LiquidTestReports.Core.csproj"
       PrivateAssets="all"
+      AdditionalProperties="Version=$(Version);InformationalVersion=$(InformationalVersion)"
     />
   </ItemGroup>
 

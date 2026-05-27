@@ -1,0 +1,10 @@
+﻿<!--
+SPDX-FileCopyrightText: 2026 smdn <smdn@smdn.jp>
+SPDX-License-Identifier: MIT
+-->
+<Solution>
+  <Folder Name="/Smdn.Extensions.Mtp.LiquidTestReports/">
+    <Project Path="Smdn.Extensions.Mtp.LiquidTestReports/MSTestProject/MSTestProject.csproj" />
+    <Project Path="Smdn.Extensions.Mtp.LiquidTestReports/NUnitTestProject/NUnitTestProject.csproj" />
+  </Folder>
+</Solution>

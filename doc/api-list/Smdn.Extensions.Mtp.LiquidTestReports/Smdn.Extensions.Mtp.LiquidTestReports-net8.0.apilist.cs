@@ -1,16 +1,16 @@
-// Smdn.Extensions.Mtp.LiquidTestReports.dll (Smdn.Extensions.Mtp.LiquidTestReports-1.1.0-preview1)
+// Smdn.Extensions.Mtp.LiquidTestReports.dll (Smdn.Extensions.Mtp.LiquidTestReports-1.1.0)
 //   Name: Smdn.Extensions.Mtp.LiquidTestReports
 //   AssemblyVersion: 1.1.0.0
-//   InformationalVersion: 1.1.0-preview1+cc43db51173ab3806183db3aa2f88415c5f7dabd
+//   InformationalVersion: 1.1.0+427fd71d1653f27fc904be78ba82dad49522a706
 //   TargetFramework: .NETCoreApp,Version=v8.0
 //   Configuration: Release
 //   Metadata: RepositoryUrl=https://github.com/smdn/Smdn.Extensions.Mtp.LiquidTestReports
 //   Metadata: Microsoft.Testing.Platform.Application=true
 //   Metadata: RepositoryBranch=main
-//   Metadata: RepositoryCommit=cc43db51173ab3806183db3aa2f88415c5f7dabd
+//   Metadata: RepositoryCommit=427fd71d1653f27fc904be78ba82dad49522a706
 //   Referenced assemblies:
 //     DotLiquid, Version=2.3.197.0, Culture=neutral, PublicKeyToken=82e46016ecf9f07c
-//     LiquidTestReports.Core, Version=1.0.0.0, Culture=neutral
+//     LiquidTestReports.Core, Version=1.1.0.0, Culture=neutral
 //     Microsoft.Testing.Extensions.TrxReport, Version=2.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 //     Microsoft.Testing.Platform, Version=2.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
 //     System.Collections, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a
