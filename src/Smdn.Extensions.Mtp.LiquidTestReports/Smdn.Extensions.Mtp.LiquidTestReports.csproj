@@ -48,6 +48,7 @@ SPDX-License-Identifier: MIT
     <ProjectReference
       Include="$(MSBuildThisFileDirectory)..\external\LiquidTestReports.Core\LiquidTestReports.Core.csproj"
       PrivateAssets="all"
+      AdditionalProperties="Version=$(Version);InformationalVersion=$(InformationalVersion)"
     />
   </ItemGroup>
 
