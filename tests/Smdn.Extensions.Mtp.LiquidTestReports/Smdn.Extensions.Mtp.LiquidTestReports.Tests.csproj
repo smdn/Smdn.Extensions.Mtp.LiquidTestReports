@@ -14,9 +14,9 @@ SPDX-License-Identifier: MIT
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.Testing.Platform" Version="2.2.1" />
-    <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="2.2.1" />
-    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.2.1" />
-    <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.2.1" />
+    <PackageReference Update="Microsoft.Testing.Platform" Version="2.3.3" />
+    <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="2.3.3" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" Version="2.3.3" />
+    <PackageReference Include="Microsoft.Testing.Extensions.VSTestBridge" Version="2.3.3" />
   </ItemGroup>
 </Project>
