@@ -1,10 +1,5 @@
 ﻿// SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
 // SPDX-License-Identifier: MIT
-#if SYSTEM_IO_FILE_READLINESASYNC
-#define SYSTEM_IO_FILE_READALLTEXTASYNC
-#define SYSTEM_IO_FILE_WRITEALLTEXTASYNC
-#endif
-
 using System;
 using System.Collections.Generic;
 #if SYSTEM_DIAGNOSTICS_CODEANALYSIS_MEMBERNOTNULLWHENATTRIBUTE
