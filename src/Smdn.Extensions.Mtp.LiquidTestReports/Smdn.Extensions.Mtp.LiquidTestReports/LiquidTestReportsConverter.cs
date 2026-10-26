@@ -149,11 +149,11 @@ internal sealed class LiquidTestReportsConverter :
   }
 
   public Type[] DataTypesConsumed { get; } = [
-    typeof(SessionFileArtifact) // consumes TRX file produced by Microsoft.Testing.Extensions.TrxReport
+    typeof(SessionFileArtifact), // consumes TRX file produced by Microsoft.Testing.Extensions.TrxReport
   ];
 
   public Type[] DataTypesProduced { get; } = [
-    typeof(SessionFileArtifact) // produces LiquidTestReports output
+    typeof(SessionFileArtifact), // produces LiquidTestReports output
   ];
 
   /// <inheritdoc />
@@ -299,7 +299,7 @@ internal sealed class LiquidTestReportsConverter :
 #else
         string.Empty
 #endif
-      )
+      ),
     ];
     var generatedFile = new FileInfo(Path.ChangeExtension(trxFile.FullName, outputFileExtension));
     var (generatedReportContent, generatorErrors) = await GenerateReportAsync(
