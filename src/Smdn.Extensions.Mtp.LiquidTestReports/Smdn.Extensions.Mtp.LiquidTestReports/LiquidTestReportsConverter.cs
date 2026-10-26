@@ -313,7 +313,6 @@ internal sealed class LiquidTestReportsConverter :
           new Dictionary<string, object>(Template.NamingConvention.StringComparer) { },
 #endif
       },
-#pragma warning disable SA1114
       parameters: templateParameters
         .Concat(builtInParameters.Where(pair => !templateParameters.ContainsKey(pair.Key)))
         .ToDictionary(
@@ -323,7 +322,6 @@ internal sealed class LiquidTestReportsConverter :
 #endif
           comparer: templateParameters.Comparer
         ),
-#pragma warning restore SA1114
       cancellationToken: cancellationToken
     ).ConfigureAwait(false);
 

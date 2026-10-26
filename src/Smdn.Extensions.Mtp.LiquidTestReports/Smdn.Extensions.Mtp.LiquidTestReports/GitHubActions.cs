@@ -34,7 +34,6 @@ internal static class GitHubActions {
     }
 
     try {
-#pragma warning disable SA1114
       await TryIOAsync(
         async ct => {
           try {
@@ -52,7 +51,6 @@ internal static class GitHubActions {
         },
         cancellationToken: cancellationToken
       ).ConfigureAwait(false);
-#pragma warning restore SA1114
     }
     catch (Exception ex) when (ex is UnauthorizedAccessException or IOException) {
       await displayOutputDeviceAsync(
