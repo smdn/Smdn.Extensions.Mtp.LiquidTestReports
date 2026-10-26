@@ -1,4 +1,4 @@
-﻿// SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
+// SPDX-FileCopyrightText: 2025 smdn <smdn@smdn.jp>
 // SPDX-License-Identifier: MIT
 #if SYSTEM_STRING_INDEXOF_CHAR_STRINGCOMPARISON
 using System;
