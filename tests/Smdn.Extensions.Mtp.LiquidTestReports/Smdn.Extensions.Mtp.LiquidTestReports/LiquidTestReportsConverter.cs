@@ -8,11 +8,11 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-using NUnit.Framework;
-
 using Microsoft.Testing.Extensions;
 using Microsoft.Testing.Platform.Builder;
 using Microsoft.Testing.Platform.Services;
+
+using NUnit.Framework;
 
 namespace Smdn.Extensions.Mtp.LiquidTestReports;
 
