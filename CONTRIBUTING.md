@@ -6,6 +6,11 @@
 [GitHub sponsors]:https://github.com/sponsors/smdn?frequency=one-time "GitHub sponsors"
 [Smdn.MSBuild.ProjectAssets.Library]:https://github.com/smdn/Smdn.Fundamentals.BuildAssets "`Smdn.MSBuild.ProjectAssets.Library`"
 
+> [!NOTE]
+> **This repository is archived and read-only.**
+>
+> Issues, pull requests, and other contributions are no longer accepted. For test reporting in GitHub Actions environments, migration to [Microsoft.Testing.Extensions.GitHubActionsReport](https://www.nuget.org/packages/Microsoft.Testing.Extensions.GitHubActionsReport) is recommended.
+
 # Contribution guidelines
 Contributions are welcome! Submitting [Issue]s or [Pull Request]s is the primary way to contribute to this project.
 
